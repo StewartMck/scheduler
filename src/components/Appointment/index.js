@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useVisualMode from "hooks/useVisualMode";
 import "./styles.scss";
 import Header from "./Header";
@@ -10,6 +10,8 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 
 const Appointment = function (props) {
+  console.log("appointment props", props);
+
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -49,10 +51,19 @@ const Appointment = function (props) {
       .catch(() => transition(ERROR_DELETE, true));
   };
 
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+      transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+      transition(EMPTY);
+    }
+  }, [props.interview, transition, mode]);
+
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
