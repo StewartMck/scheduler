@@ -10,8 +10,6 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 
 const Appointment = function (props) {
-  console.log("appointment props", props);
-
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -20,7 +18,6 @@ const Appointment = function (props) {
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
-  const ERROR_SAVE_NO_INFO = "ERROR_SAVE_NO_INFO";
   const ERROR_DELETE = "ERROR_DELETE";
 
   const { mode, transition, back } = useVisualMode(
@@ -28,19 +25,15 @@ const Appointment = function (props) {
   );
 
   const saveAppointment = (name, interviewer) => {
-    if (name && interviewer) {
-      const interview = {
-        student: name,
-        interviewer,
-      };
-      transition(SAVING);
-      props
-        .bookInterview(props.id, interview)
-        .then(() => transition(SHOW))
-        .catch(() => transition(ERROR_SAVE, true));
-    } else {
-      transition(ERROR_SAVE_NO_INFO);
-    }
+    const interview = {
+      student: name,
+      interviewer,
+    };
+    transition(SAVING);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
   const deleteAppointment = (id) => {
@@ -83,12 +76,6 @@ const Appointment = function (props) {
       {mode === SAVING && <Status message="Saving" />}
       {mode === ERROR_SAVE && (
         <Error message={"Could not confirm the appointment"} onClose={back} />
-      )}
-      {mode === ERROR_SAVE_NO_INFO && (
-        <Error
-          message={"Please enter a student name and select an interviewer"}
-          onClose={back}
-        />
       )}
       {mode === DELETING && <Status message="Deleting" />}
       {mode === ERROR_DELETE && (

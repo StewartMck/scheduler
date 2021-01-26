@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react";
-const axios = require("axios");
+import axios from "axios";
+// const axios = require("axios");
 
 const useApplicationData = function () {
   const SET_DAY = "SET_DAY";
@@ -14,7 +15,19 @@ const useApplicationData = function () {
       case SET_APPLICATION_DATA:
         return { ...state, ...action.value };
       case SET_INTERVIEW:
-        const interview = action.value.interview;
+        const { id, interview } = action.value;
+        // only update spots if this is a new interview
+        let days;
+        if (!state.appointments[id].interview) {
+          const dayOfInterview = [...state.days].filter((day) =>
+            day.appointments.includes(action.value.id)
+          );
+          let { spots } = dayOfInterview;
+          interview ? (spots = spots - 1) : (spots = spots + 1);
+          console.log("found", dayOfInterview);
+        }
+        // need to replace dayofInterview in days array and return updated state.
+
         return {
           ...state,
           appointments: {
@@ -64,35 +77,17 @@ const useApplicationData = function () {
       );
 
     const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-
-    socket.addEventListener("message", (event) => {
-      const data = JSON.parse(event.data);
-      const appointment = {
-        id: data.id,
-        interview: data.interview,
-      };
-
-      //need to fix update spots feature here
-      // switch of if statement to output day to pass to update Day
-      let id = appointment.id;
-      let day =
-        id > 0 && id <= 5
-          ? "Monday"
-          : id > 5 && id <= 10
-          ? "Tuesday"
-          : id > 10 && id <= 15
-          ? "Wednesday"
-          : id > 15 && id <= 20
-          ? "Thusday"
-          : "Friday";
-
-      console.log("day", day);
-
-      // updateDaySpots(day, true);
-
-      dispatch({
-        type: SET_INTERVIEW,
-        value: appointment,
+    socket.addEventListener("open", () => {
+      socket.addEventListener("message", (event) => {
+        const { id, interview } = JSON.parse(event.data);
+        const appointment = {
+          id,
+          interview,
+        };
+        dispatch({
+          type: SET_INTERVIEW,
+          value: appointment,
+        });
       });
     });
 
