@@ -41,6 +41,10 @@ const reducer = function (state, action) {
         },
         days,
       };
+    default:
+      throw new Error(
+        `Tried to reduce with unsupported action type: ${action.type}`
+      );
   }
 };
 
