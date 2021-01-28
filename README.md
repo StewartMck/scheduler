@@ -1,6 +1,9 @@
 !["Interview Scheduler Logo"](docs/inerview_logo.PNG)
 
-> Interview Scheduler is a React application that allows users to book and cancel interviews in realtime.
+### Interview Scheduler is a React application that allows users to book and cancel interviews in realtime.
+
+<br>
+<br>
 
 !["Scheduler gif"](docs/scheduler.gif)
 
@@ -31,6 +34,10 @@
 2. Start the scheduler-api using the `npm start` command in scheduler-api.
 3. Start the react server using the `npm start` command in scheduler. The app will be served at <http://localhost:8000/>.
 4. Go to <http://localhost:8080/> in your browser.
+
+> The code is live @ https://xenodochial-kowalevski-3c9e8b.netlify.app
+
+---
 
 ## Dependencies & Dev Dependencies
 
