@@ -1,20 +1,18 @@
-# Interview Scheduler
-
-!["Interview Scheduler Logo"](https://github.com/StewartMck/tweeter/blob/master/public/docs/interview_logo.PNG?raw=true)
+!["Interview Scheduler Logo"](docs/inerview_logo.PNG)
 
 > Interview Scheduler is a React application that allows users to book and cancel interviews in realtime.
 
-!["Tweeter gif"](https://github.com/StewartMck/tweeter/blob/master/public/docs/scheduler.gif)
+!["Scheduler gif"](docs/scheduler.gif)
 
 ## Skills on Display
 
-[x] React
-[x] Webpack, Babel
-[x] Axios
-[x] WebSockets
-[x] Storybook
-[x] Jest
-[x] Cypress
+- [x] React
+- [x] Webpack, Babel
+- [x] Axios
+- [x] WebSockets
+- [x] Storybook
+- [x] Jest
+- [x] Cypress
 
 ## Features
 
@@ -36,23 +34,23 @@
 
 ## Dependencies & Dev Dependencies
 
-axios
-classnames
-normalize.css
-react-dom
-react-scripts
-react ^16.9.0
-react-test-renderer ^16.9.0
-@babel/core
-@storybook/addon-actions
-@storybook/addon-backgrounds
-@storybook/addon-links
-@storybook/addons
-@storybook/react
-@testing-library/jest-dom
-@testing-library/react
-@testing-library/react-hooks
-babel-loader
-eslint-plugin-cypress
-node-sass
-prop-types
+- axios
+- classnames
+- normalize.css
+- react-dom
+- react-scripts
+- react ^16.9.0
+- react-test-renderer ^16.9.0
+- @babel/core
+- @storybook/addon-actions
+- @storybook/addon-backgrounds
+- @storybook/addon-links
+- @storybook/addons
+- @storybook/react
+- @testing-library/jest-dom
+- @testing-library/react
+- @testing-library/react-hooks
+- babel-loader
+- eslint-plugin-cypress
+- node-sass
+- prop-types
