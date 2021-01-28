@@ -22,7 +22,7 @@ const useApplicationData = function () {
     ])
       .then((all) => {
         dispatch({
-          type: "SET_APPLICATION_DATA",
+          type: SET_APPLICATION_DATA,
           value: {
             days: all[0].data,
             appointments: all[1].data,
@@ -56,7 +56,7 @@ const useApplicationData = function () {
     };
   }, []);
 
-  const setDay = (day) => dispatch({ type: "SET_DAY", value: day });
+  const setDay = (day) => dispatch({ type: SET_DAY, value: day });
 
   const bookInterview = (id, interview) => {
     const appointment = {

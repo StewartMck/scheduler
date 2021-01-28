@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import InterviewerList from "../InterviewerList";
 import Button from "../Button";
 
-const Form = function (props) {
-  const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+const Form = function ({
+  name: nameFromState,
+  interviewer: interviewerFromState,
+  onSave,
+  onCancel,
+  interviewers,
+}) {
+  const [name, setName] = useState(nameFromState || "");
+  const [interviewer, setInterviewer] = useState(interviewerFromState || null);
   const [error, setError] = useState("");
 
   const validate = function () {
@@ -21,7 +27,7 @@ const Form = function (props) {
     }
 
     setError("");
-    props.onSave(name, interviewer);
+    onSave(name, interviewer);
   };
 
   const reset = () => {
@@ -31,7 +37,7 @@ const Form = function (props) {
 
   const cancel = () => {
     reset();
-    props.onCancel();
+    onCancel();
   };
 
   return (
@@ -53,7 +59,7 @@ const Form = function (props) {
           <section className="appointment__validation">{error}</section>
         </form>
         <InterviewerList
-          interviewers={props.interviewers}
+          interviewers={interviewers}
           value={interviewer}
           onChange={setInterviewer}
         />
@@ -64,7 +70,6 @@ const Form = function (props) {
             Cancel
           </Button>
           <Button confirm onClick={validate}>
-            {/* <Button confirm onClick={() => props.onSave(name, interviewer)}> */}
             Save
           </Button>
         </section>
